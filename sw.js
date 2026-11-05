@@ -1,5 +1,5 @@
 /* Guarda la página de inicio y el ícono para que la app abra rápido. Los datos siempre vienen de la app en línea. */
-const C = "epp-cordillera-v1", BASE = ["./", "index.html", "manifest.json", "icons/icon-192.png", "icons/icon-512.png"];
+const C = "epp-cordillera-v2", BASE = ["./", "index.html", "manifest.json", "icons/icon-192.png", "icons/icon-512.png"];
 self.addEventListener("install", e => { e.waitUntil(caches.open(C).then(c => c.addAll(BASE)).then(() => self.skipWaiting())); });
 self.addEventListener("activate", e => { e.waitUntil(caches.keys().then(k => Promise.all(k.filter(x => x !== C).map(x => caches.delete(x)))).then(() => self.clients.claim())); });
 self.addEventListener("fetch", e => {

@@ -50,6 +50,8 @@ else {
   const qs = location.search ? (APP_URL.includes("?") ? "&" : "?") + location.search.slice(1) : "";
   fr.src = APP_URL + qs; fr.onload = listo; setTimeout(listo, 12000);
 }
+/* La app avisa cuando hay una versión nueva publicada: se recarga sola */
+addEventListener("message", e => { if (e.data && e.data.epp === "reload") { msg && (msg.textContent = "Actualizando…"); location.reload(); } });
 /* Volver a la app desde segundo plano: si pasó mucho rato, se recarga para ver lo último */
 let oculto = 0;
 document.addEventListener("visibilitychange", () => { if (document.hidden) oculto = Date.now(); else if (oculto && Date.now() - oculto > 30 * 60e3) location.reload(); });
